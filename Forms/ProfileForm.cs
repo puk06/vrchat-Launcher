@@ -205,7 +205,6 @@ namespace vrchat_launcher.Forms
         // Edit a profile based on form input
         private Profile EditProfile()
         {
-
             var profile = new Profile
             {
                 Name = NAMEEDIT_TEXTBOX.Text,
