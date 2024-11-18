@@ -1,4 +1,4 @@
-![](https://github.com/user-attachments/assets/8a469378-532f-47b0-99b5-bd1692255828)
+![]()
 
 # VRChat Launcher ![License](https://img.shields.io/github/license/puk06/vrchat-Launcher?style=flat-square) ![Release](https://img.shields.io/github/v/release/puk06/vrchat-Launcher?style=flat-square) ![Language](https://img.shields.io/badge/language-c%23-green?style=flat-square) ![CodeFactor](https://www.codefactor.io/repository/github/puk06/vrchat-launcher/badge)
 
@@ -29,3 +29,7 @@
 
 ### 5. User-Friendly UI
 - Designed with a clean and intuitive interface for a better user experience.
+
+# Base Repository
+
+UI Based [puk06/osu-Launcher](https://github.com/puk06/osu-Launcher)
