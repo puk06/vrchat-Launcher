@@ -125,7 +125,7 @@ namespace vrchat_launcher.Forms
         {
             var enumerable = Profiles as Profile[] ?? Profiles.ToArray();
 
-            if (string.IsNullOrEmpty(LastSelectedProfile))
+            if (!string.IsNullOrEmpty(LastSelectedProfile))
             {
                 CurrentProfile = Profiles.FirstOrDefault(profile => profile.Name == LastSelectedProfile);
                 if (CurrentProfile == null)
