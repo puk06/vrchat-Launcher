@@ -4,7 +4,7 @@
 
 > [\[discord\]](https://discord.gg/AGNDPsZPya) Free and open-source, feature-rich, powerful launcher for VRChat.
 
-**osu! Launcher** is a feature-rich and open-source launcher for osu!, aiming to make your experience even better than before.
+**VRChat Launcher** is a feature-rich and open-source launcher for VRChat, aiming to make your experience even better than before.
 
 ## ScreenShots
 
