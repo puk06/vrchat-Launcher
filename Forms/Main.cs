@@ -198,21 +198,46 @@ namespace vrchat_launcher.Forms
 
                 if (DesktopMode)
                 {
-                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    if (CurrentProfile == null)
                     {
-                        FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
-                        WorkingDirectory = vrchatPath,
-                        Arguments = "--no-vr --profile=" + CurrentProfile.Index
-                    };
-                    Process.Start(startInfo);
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
+                            WorkingDirectory = vrchatPath,
+                            Arguments = "--no-vr"
+                        };
+                        Process.Start(startInfo);
+                    }
+                    else
+                    {
+
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
+                            WorkingDirectory = vrchatPath,
+                            Arguments = "--no-vr --profile=" + CurrentProfile.Index
+                        };
+                        Process.Start(startInfo);
+                    }
                 }
                 else
                 {
-                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    if (CurrentProfile == null)
                     {
-                        FileName = "steam://rungameid/438100//" + "--profile=" + CurrentProfile.Index
-                    };
-                    Process.Start(startInfo);
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            FileName = "steam://rungameid/438100//"
+                        };
+                        Process.Start(startInfo);
+                    }
+                    else
+                    {
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            FileName = "steam://rungameid/438100//" + "--profile=" + CurrentProfile.Index
+                        };
+                        Process.Start(startInfo);
+                    }
                 }
 
                 // Launch the software
@@ -470,7 +495,8 @@ namespace vrchat_launcher.Forms
         private void RefreshProfile()
         {
             Helper.SetControlText(PROFILE_BUTTON, CurrentProfile?.Name, "No Profile");
-            DesktopMode = CurrentProfile?.DesktopMode ?? false;
+            if (CurrentProfile == null) return;
+            DesktopMode = CurrentProfile.DesktopMode;
             DESKTOP_BUTTON.Text = DesktopMode ? "Enabled" : "Disabled";
             DESKTOP_BUTTON.BackColor = DesktopMode ? Color.LightGreen : Color.LightPink;
 
