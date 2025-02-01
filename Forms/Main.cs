@@ -54,13 +54,12 @@ namespace vrchat_launcher.Forms
         {
             try
             {
-                Helper.InitializeCefSharp();
                 Helper.ValidateRequiredFiles();
                 AddFontFile();
                 InitializeComponent();
+                InitializeWebBrowser();
                 GithubUpdateChecker();
                 InitializeDefaults();
-                InitializeWebBrowser();
                 LoadConfigFile();
                 InitializeComboboxes();
                 SetInitialProfile();
@@ -79,9 +78,17 @@ namespace vrchat_launcher.Forms
 
         private void InitializeWebBrowser()
         {
-            var webBrowser = new ChromiumWebBrowser("https://vrchat.com/home");
-            TopTab.Controls.Add(webBrowser);
-            webBrowser.Dock = DockStyle.Fill;
+            var result = Helper.InitializeCefSharp();
+            if (result)
+            {
+                var webBrowser = new ChromiumWebBrowser("https://vrchat.com/home");
+                TopTab.Controls.Add(webBrowser);
+                webBrowser.Dock = DockStyle.Fill;
+            }
+            else
+            {
+                MessageBox.Show("CefSharp could not be initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadConfigFile()

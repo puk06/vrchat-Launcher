@@ -15,13 +15,13 @@ namespace vrchat_launcher
             control.Text = text ?? defaultText;
         }
 
-        public static void InitializeCefSharp()
+        public static bool InitializeCefSharp()
         {
             var settings = new CefSettings
             {
                 RootCachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CefSharp\\Cache")
             };
-            Cef.Initialize(settings);
+            return Cef.Initialize(settings);
         }
 
         public static void ValidateRequiredFiles()
