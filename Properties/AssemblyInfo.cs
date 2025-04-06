@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // アセンブリに関する一般的な情報は、次の方法で制御されます
 // 制御されます。アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更します。
-[assembly: AssemblyTitle("osu-launcher")]
-[assembly: AssemblyDescription("Simple osu! Launcher")]
+[assembly: AssemblyTitle("vrchat-launcher")]
+[assembly: AssemblyDescription("Simple VRChat Launcher")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("osu-launcher")]
-[assembly: AssemblyCopyright("Copyright ©  2024 Hoshino1")]
+[assembly: AssemblyProduct("vrchat-launcher")]
+[assembly: AssemblyCopyright("Copyright © 2025 pukorufu")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

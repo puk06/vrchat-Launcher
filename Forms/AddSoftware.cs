@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using vrchat_launcher.Classes;
-using Helper = vrchat_launcher.Helper;
 
 namespace vrchat_launcher.Forms
 {
