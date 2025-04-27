@@ -54,9 +54,6 @@ const EMPTY_JSON_DATA = {
         console.log(`Copying ${font} to ${path.join(srcFolder, "Fonts", font)}`);
         fs.copyFileSync(fontPath, path.join(srcFolder, "Fonts", font));
     }
-
-
-
 })()
 
 async function copyFolder(src, dest) {
