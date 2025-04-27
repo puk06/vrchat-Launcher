@@ -266,54 +266,55 @@ namespace vrchat_launcher.Forms
                         MessageBox.Show("VRChat could not be launched. The reasons are as follows.\n" + "VRChat Folder not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                }
 
-                    if (DesktopMode)
+                if (DesktopMode)
+                {
+                    if (CurrentProfile == null)
                     {
-                        if (CurrentProfile == null)
+                        ProcessStartInfo startInfo = new ProcessStartInfo
                         {
-                            ProcessStartInfo startInfo = new ProcessStartInfo
-                            {
-                                FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
-                                WorkingDirectory = vrchatPath,
-                                Arguments = "--no-vr"
-                            };
-                            Process.Start(startInfo);
-                        }
-                        else
-                        {
-
-                            ProcessStartInfo startInfo = new ProcessStartInfo
-                            {
-                                FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
-                                WorkingDirectory = vrchatPath,
-                                Arguments = "--no-vr --profile=" + CurrentProfile.Index
-                            };
-                            Process.Start(startInfo);
-                        }
+                            FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
+                            WorkingDirectory = vrchatPath,
+                            Arguments = "--no-vr"
+                        };
+                        Process.Start(startInfo);
                     }
                     else
                     {
-                        if (CurrentProfile == null)
-                        {
-                            ProcessStartInfo startInfo = new ProcessStartInfo
-                            {
-                                FileName = "steam://rungameid/438100//"
-                            };
-                            Process.Start(startInfo);
-                        }
-                        else
-                        {
-                            ProcessStartInfo startInfo = new ProcessStartInfo
-                            {
-                                FileName = "steam://rungameid/438100//" + "--profile=" + CurrentProfile.Index
-                            };
-                            Process.Start(startInfo);
-                        }
-                    }
 
-                    // Launch the software
-                    LaunchSoftwares();
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
+                            WorkingDirectory = vrchatPath,
+                            Arguments = "--no-vr --profile=" + CurrentProfile.Index
+                        };
+                        Process.Start(startInfo);
+                    }
                 }
+                else
+                {
+                    if (CurrentProfile == null)
+                    {
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            FileName = "steam://rungameid/438100//"
+                        };
+                        Process.Start(startInfo);
+                    }
+                    else
+                    {
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            FileName = "steam://rungameid/438100//" + "--profile=" + CurrentProfile.Index
+                        };
+                        Process.Start(startInfo);
+                    }
+                }
+
+                // Launch the software
+                LaunchSoftwares();
+            }
             catch (Exception ex)
             {
                 Helper.ShowErrorMessage("VRChat could not be launched. The reasons are as follows.\n" + ex);
