@@ -235,8 +235,8 @@ namespace vrchat_launcher.Forms
                         else
                         {
                             MessageBox.Show("VRChat could not be launched. The reasons are as follows.\n" + "VRChat Folder not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
                         }
-                        return;
                     }
                 }
 
