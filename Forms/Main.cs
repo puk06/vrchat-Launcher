@@ -18,6 +18,7 @@ namespace vrchat_launcher.Forms
     public partial class Main : Form
     {
         public const string CurrentVersion = "v1.0.0-Release";
+        private const string CustomVRChatPathFile = "custom_vrchat_path.txt";
 
         // Data Values
         public JObject Data;
@@ -201,7 +202,71 @@ namespace vrchat_launcher.Forms
                 // Save the config data
                 SaveConfigData();
 
-                const string vrchatPath = "C:/Program Files (x86)/Steam/steamapps/common/VRChat";
+                string vrchatPath = "C:/Program Files (x86)/Steam/steamapps/common/VRChat";
+
+                if (File.Exists(CustomVRChatPathFile))
+                {
+                    string customPath = File.ReadAllText(CustomVRChatPathFile);
+                    if (Directory.Exists(customPath))
+                    {
+                        vrchatPath = customPath;
+                    }
+                    else
+                    {
+                        var result = MessageBox.Show("VRChat Folder not found. Do you want to set the custom path?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (result == DialogResult.Yes)
+                        {
+                            using (var folderBrowserDialog = new FolderBrowserDialog())
+                            {
+                                folderBrowserDialog.Description = "Select the VRChat folder";
+                                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                                {
+                                    if (!File.Exists(Path.Combine(folderBrowserDialog.SelectedPath, "start_protected_game.exe")))
+                                    {
+                                        MessageBox.Show("The selected folder does not contain start_protected_game.exe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+
+                                    vrchatPath = folderBrowserDialog.SelectedPath;
+                                    File.WriteAllText(CustomVRChatPathFile, vrchatPath);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("VRChat could not be launched. The reasons are as follows.\n" + "VRChat Folder not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        return;
+                    }
+                }
+
+                if (!Directory.Exists(vrchatPath))
+                {
+                    var result = MessageBox.Show("VRChat Folder not found. Do you want to set the custom path?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (result == DialogResult.Yes)
+                    {
+                        using (var folderBrowserDialog = new FolderBrowserDialog())
+                        {
+                            folderBrowserDialog.Description = "Select the VRChat folder";
+                            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                if (!File.Exists(Path.Combine(folderBrowserDialog.SelectedPath, "start_protected_game.exe")))
+                                {
+                                    MessageBox.Show("The selected folder does not contain start_protected_game.exe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+
+                                vrchatPath = folderBrowserDialog.SelectedPath;
+                                File.WriteAllText(CustomVRChatPathFile, vrchatPath);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("VRChat could not be launched. The reasons are as follows.\n" + "VRChat Folder not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
 
                 if (DesktopMode)
                 {
@@ -537,30 +602,16 @@ namespace vrchat_launcher.Forms
         {
             try
             {
-                if (!File.Exists("./Updater/Software Updater.exe"))
+                ProcessStartInfo processStartInfo = new ProcessStartInfo
                 {
-                    MessageBox.Show("The updater was not found. Please download it manually.", "Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return;
-                }
-
-                string updaterPath = Path.GetFullPath("./Updater/Software Updater.exe");
-                string latestVersion = LATEST_VERSION_TEXT.Text;
-                const string author = "puk06";
-                const string repository = "vrchat-Launcher";
-                const string executableName = "vrchat-launcher";
-                ProcessStartInfo args = new ProcessStartInfo()
-                {
-                    FileName = $"\"{updaterPath}\"",
-                    Arguments = $"\"{latestVersion}\" \"{author}\" \"{repository}\" \"{executableName}\" \"data.json\"",
-                    UseShellExecute = true
+                    UseShellExecute = true,
+                    FileName = "https://github.com/puk06/vrchat-Launcher/releases/latest"
                 };
-
-                Process.Start(args);
+                Process.Start(processStartInfo);
             }
             catch (Exception exception)
             {
-                MessageBox.Show("The updater could not be launched" + exception.Message, "Error", MessageBoxButtons.OK,
+                MessageBox.Show("Failed to open the update page. The reasons are as follows.\n" + exception, "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
