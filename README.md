@@ -33,3 +33,9 @@
 # Base Repository
 
 UI Based [puk06/osu-Launcher](https://github.com/puk06/osu-Launcher)
+
+# Licences
+本ソフトウェアで使用されている「Noto Sans」、「Quicksand」フォントは、Google によって提供され、SIL Open Font License 1.1 のもとでライセンスされています。
+
+ライセンス名: SIL Open Font License 1.1
+ライセンスの全文: https://scripts.sil.org/OFL
