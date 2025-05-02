@@ -62,4 +62,28 @@ This software uses the following third-party libraries:
   
   Copyright (c) OxyPlot contributors
   
-  https://github.com/oxyplot/oxyplot/blob/develop/LICENSE=
+  https://github.com/oxyplot/oxyplot/blob/develop/LICENSE
+
+- CefSharp (https://github.com/cefsharp/CefSharp)
+  
+  Licensed under the MIT License
+  
+  https://github.com/cefsharp/CefSharp/blob/master/LICENSE
+
+
+  This software uses the Chromium Embedded Framework (CEF)
+  
+  and includes portions of the Chromium project.
+  
+  See https://bitbucket.org/chromiumembedded/cef for more information.
+  
+
+  The Chromium and CEF projects include code licensed under:
+  
+  - BSD License (Chromium)
+
+  - LGPL, MPL, and other licenses (dependencies)
+
+  For a full list of third-party licenses used by Chromium, see:
+  
+  https://chromium.googlesource.com/chromium/src/+/main/LICENSE
