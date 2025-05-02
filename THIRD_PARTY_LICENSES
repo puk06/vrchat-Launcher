@@ -1,0 +1,39 @@
+本ソフトウェアで使用されている「Noto Sans」、「Quicksand」フォントは、Google によって提供され、SIL Open Font License 1.1 のもとでライセンスされています。
+
+ライセンス名: SIL Open Font License 1.1
+ライセンスの全文: https://scripts.sil.org/OFL
+
+This software uses the following third-party libraries:
+  
+- Microsoft.CSharp (https://github.com/dotnet/corefx)
+  Licensed under the MIT License.
+  Copyright (c) .NET Foundation and Contributors
+  https://github.com/dotnet/runtime/blob/main/LICENSE.TXT
+
+- Newtonsoft.Json
+  https://github.com/JamesNK/Newtonsoft.Json  
+  Licensed under the MIT License  
+  https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md
+
+- Octokit.NET
+  https://github.com/octokit/octokit.net  
+  Licensed under the MIT License  
+  https://github.com/octokit/octokit.net/blob/main/LICENSE
+
+- CefSharp (https://github.com/cefsharp/CefSharp)
+  Licensed under the MIT License
+  https://github.com/cefsharp/CefSharp/blob/master/LICENSE
+
+  This software uses the Chromium Embedded Framework (CEF)
+  and includes portions of the Chromium project.
+  See https://bitbucket.org/chromiumembedded/cef for more information.
+
+  The Chromium and CEF projects include code licensed under:
+  
+  - BSD License (Chromium)
+
+  - LGPL, MPL, and other licenses (dependencies)
+
+  For a full list of third-party licenses used by Chromium, see:
+  
+  https://chromium.googlesource.com/chromium/src/+/main/LICENSE

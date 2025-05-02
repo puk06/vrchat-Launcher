@@ -1,5 +1,3 @@
-![]()
-
 # VRChat Launcher ![License](https://img.shields.io/github/license/puk06/vrchat-Launcher?style=flat-square) ![Release](https://img.shields.io/github/v/release/puk06/vrchat-Launcher?style=flat-square) ![Language](https://img.shields.io/badge/language-c%23-green?style=flat-square) ![CodeFactor](https://www.codefactor.io/repository/github/puk06/vrchat-launcher/badge)
 
 > [\[discord\]](https://discord.gg/AGNDPsZPya) Free and open-source, feature-rich, powerful launcher for VRChat.
