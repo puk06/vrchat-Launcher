@@ -1,5 +1,3 @@
-![]()
-
 # VRChat Launcher ![License](https://img.shields.io/github/license/puk06/vrchat-Launcher?style=flat-square) ![Release](https://img.shields.io/github/v/release/puk06/vrchat-Launcher?style=flat-square) ![Language](https://img.shields.io/badge/language-c%23-green?style=flat-square) ![CodeFactor](https://www.codefactor.io/repository/github/puk06/vrchat-launcher/badge)
 
 > [\[discord\]](https://discord.gg/AGNDPsZPya) Free and open-source, feature-rich, powerful launcher for VRChat.
@@ -39,3 +37,29 @@ UI Based [puk06/osu-Launcher](https://github.com/puk06/osu-Launcher)
 
 ライセンス名: SIL Open Font License 1.1
 ライセンスの全文: https://scripts.sil.org/OFL
+
+This software uses the following third-party libraries:
+
+- HtmlAgilityPack (https://github.com/zzzprojects/html-agility-pack)
+  
+  Licensed under the MIT License
+  
+  https://github.com/zzzprojects/html-agility-pack/blob/master/LICENSE
+  
+  
+- Microsoft.CSharp (https://github.com/dotnet/corefx)
+
+  Licensed under the MIT License.
+  
+  Copyright (c) .NET Foundation and Contributors
+  
+  https://github.com/dotnet/runtime/blob/main/LICENSE.TXT
+
+
+- OxyPlot (https://oxyplot.github.io/)
+
+  Licensed under the MIT License.
+  
+  Copyright (c) OxyPlot contributors
+  
+  https://github.com/oxyplot/oxyplot/blob/develop/LICENSE=
