@@ -10,11 +10,6 @@ This software uses the following third-party libraries:
   Copyright (c) .NET Foundation and Contributors
   https://github.com/dotnet/runtime/blob/main/LICENSE.TXT
 
-- Newtonsoft.Json
-  https://github.com/JamesNK/Newtonsoft.Json  
-  Licensed under the MIT License  
-  https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md
-
 - Octokit.NET
   https://github.com/octokit/octokit.net  
   Licensed under the MIT License  

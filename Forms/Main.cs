@@ -80,10 +80,11 @@ namespace vrchat_launcher.Forms
         {
             try
             {
-                Data = JsonSerializer.Deserialize<Database>(File.ReadAllText("./src/data.json", Encoding.GetEncoding("Shift-JIS")));
+                Data = JsonSerializer.Deserialize<Database>(File.ReadAllText("./src/data.json", Encoding.GetEncoding("Shift_JIS")));
             } 
-            catch 
+            catch (Exception ex)
             {
+                Helper.ShowErrorMessage(ex.ToString());
                 Data = new Database();
             }
         }
@@ -235,7 +236,8 @@ namespace vrchat_launcher.Forms
                     {
                         ProcessStartInfo startInfo = new ProcessStartInfo
                         {
-                            FileName = "steam://rungameid/438100//" + " --profile=" + CurrentProfile.Index
+                            FileName = "steam://rungameid/438100//",
+                            Arguments = "--profile=" + CurrentProfile.Index
                         };
 
                         Process.Start(startInfo);
@@ -256,7 +258,7 @@ namespace vrchat_launcher.Forms
         private void SaveConfigData()
         {
             var json = JsonSerializer.Serialize(Data, JsonSerializerOptions);
-            File.WriteAllText("./src/data.json", json, Encoding.GetEncoding("Shift-JIS"));
+            File.WriteAllText("./src/data.json", json, Encoding.GetEncoding("Shift_JIS"));
         }
 
         // Launch the software
