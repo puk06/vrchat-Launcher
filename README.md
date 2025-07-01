@@ -31,3 +31,5 @@
 # Base Repository
 
 UI Based [puk06/osu-Launcher](https://github.com/puk06/osu-Launcher)
+
+Icon: [Icons8](https://icons8.com/icon/l3l1gzizJLqM/vrchat)
