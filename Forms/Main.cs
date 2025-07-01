@@ -84,6 +84,7 @@ namespace vrchat_launcher.Forms
             } 
             catch (Exception ex)
             {
+                Helper.ShowErrorMessage("エラー: データの読み込みに失敗しました。\n" + ex.Message);
                 Data = new Database();
             }
         }
