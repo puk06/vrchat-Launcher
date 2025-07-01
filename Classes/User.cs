@@ -1,10 +1,10 @@
 ﻿namespace vrchat_launcher.Classes
 {
-    internal class Profile
+    public class Profile
     {
-        internal string Name { get; set; } = string.Empty;
-        internal string Description { get; set; } = string.Empty;
-        internal bool DesktopMode { get; set; }
-        internal int Index { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public bool DesktopMode { get; set; }
+        public int Index { get; set; }
     }
 }

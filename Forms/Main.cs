@@ -198,50 +198,27 @@ namespace vrchat_launcher.Forms
 
                 if (Data.LastSelectedDesktopMode)
                 {
-                    if (CurrentProfile == null)
+                    ProcessStartInfo startInfo = new ProcessStartInfo
                     {
-                        ProcessStartInfo startInfo = new ProcessStartInfo
-                        {
-                            FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
-                            WorkingDirectory = vrchatPath,
-                            Arguments = "--no-vr"
-                        };
+                        FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
+                        WorkingDirectory = vrchatPath,
+                        Arguments = "--no-vr"
+                    };
 
-                        Process.Start(startInfo);
-                    }
-                    else
-                    {
-                        ProcessStartInfo startInfo = new ProcessStartInfo
-                        {
-                            FileName = Path.Combine(vrchatPath, "start_protected_game.exe"),
-                            WorkingDirectory = vrchatPath,
-                            Arguments = "--no-vr --profile=" + CurrentProfile.Index
-                        };
+                    if (CurrentProfile != null) startInfo.Arguments += " --profile=" + CurrentProfile.Index;
 
-                        Process.Start(startInfo);
-                    }
+                    Process.Start(startInfo);
                 }
                 else
                 {
-                    if (CurrentProfile == null)
+                    ProcessStartInfo startInfo = new ProcessStartInfo
                     {
-                        ProcessStartInfo startInfo = new ProcessStartInfo
-                        {
-                            FileName = "steam://rungameid/438100//"
-                        };
+                        FileName = "steam://rungameid/438100//"
+                    };
 
-                        Process.Start(startInfo);
-                    }
-                    else
-                    {
-                        ProcessStartInfo startInfo = new ProcessStartInfo
-                        {
-                            FileName = "steam://rungameid/438100//",
-                            Arguments = "--profile=" + CurrentProfile.Index
-                        };
+                    if (CurrentProfile != null) startInfo.Arguments = "--profile=" + CurrentProfile.Index;
 
-                        Process.Start(startInfo);
-                    }
+                    Process.Start(startInfo);
                 }
 
                 // Launch the software
@@ -258,6 +235,7 @@ namespace vrchat_launcher.Forms
         private void SaveConfigData()
         {
             var json = JsonSerializer.Serialize(Data, JsonSerializerOptions);
+            Helper.ShowErrorMessage(json);
             File.WriteAllText("./src/data.json", json, Encoding.GetEncoding("Shift_JIS"));
         }
 

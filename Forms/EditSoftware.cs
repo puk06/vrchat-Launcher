@@ -18,7 +18,7 @@ namespace vrchat_launcher.Forms
             => _software;
 
 
-        internal EditSoftware(Main mainForm, Software software)
+        public EditSoftware(Main mainForm, Software software)
         {
             _mainForm = mainForm;
             _software = software;

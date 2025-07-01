@@ -1,11 +1,11 @@
 ﻿namespace vrchat_launcher.Classes
 {
-    internal class Software
+    public class Software
     {
-        internal string Name { get; set; } = string.Empty;
-        internal string Author { get; set; } = string.Empty;
-        internal string Description { get; set; } = string.Empty;
-        internal string Path { get; set; } = string.Empty;
-        internal bool Checked { get; set; } = false;
+        public string Name { get; set; } = string.Empty;
+        public string Author { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string Path { get; set; } = string.Empty;
+        public bool Checked { get; set; } = false;
     }
 }

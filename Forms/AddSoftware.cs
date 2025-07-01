@@ -17,7 +17,7 @@ namespace vrchat_launcher.Forms
         internal List<Software> Softwares
             => _softwareList;
 
-        internal AddSoftware(Main mainForm, List<Software> softwareList)
+        public AddSoftware(Main mainForm, List<Software> softwareList)
         {
             _mainForm = mainForm;
             _softwareList = softwareList;

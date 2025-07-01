@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace vrchat_launcher.Classes
 {
-    internal class Database
+    public class Database
     {
-        internal List<Profile> Profiles { get; set; } = new List<Profile>();
-        internal List<Software> Softwares { get; set; } = new List<Software>();
-        internal bool LastSelectedDesktopMode { get; set; } = false;
-        internal string LastSelectedProfile { get; set; } = string.Empty;
+        public List<Profile> Profiles { get; set; } = new List<Profile>();
+        public List<Software> Softwares { get; set; } = new List<Software>();
+        public bool LastSelectedDesktopMode { get; set; } = false;
+        public string LastSelectedProfile { get; set; } = string.Empty;
     }
 }

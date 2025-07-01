@@ -22,7 +22,7 @@ namespace vrchat_launcher.Forms
             => _profile;
 
         // This is the constructor for the ProfileForm
-        internal ProfileForm(Main mainForm, List<Profile> profiles, Profile profile)
+        public ProfileForm(Main mainForm, List<Profile> profiles, Profile profile)
         {
             _mainForm = mainForm;
             _profiles = profiles;
