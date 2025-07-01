@@ -13,13 +13,18 @@ namespace vrchat_launcher.Forms
         private readonly Main _mainForm;
 
         // Edit the software
-        private readonly Software _software;
+        private Software _software;
+        internal Software Software
+            => _software;
 
-        public EditSoftware(Main mainForm, Software software)
+
+        internal EditSoftware(Main mainForm, Software software)
         {
             _mainForm = mainForm;
-            InitializeComponent();
             _software = software;
+
+            InitializeComponent();
+
             NAME_TEXTBOX.Text = software.Name;
             AUTHOR_TEXTBOX.Text = software.Author;
             DESCRIPTION_TEXTBOX.Text = software.Description;
@@ -47,8 +52,7 @@ namespace vrchat_launcher.Forms
                 Checked = _software.Checked
             };
 
-            _mainForm.Softwares = _mainForm.Softwares.Where(s => s.Name != _software.Name).ToArray();
-            _mainForm.Softwares = _mainForm.Softwares.Append(software);
+            _software = software;
             MessageBox.Show("Software edited successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
@@ -80,30 +84,30 @@ namespace vrchat_launcher.Forms
         // Check if the values are valid
         private IEnumerable<string> CheckValue()
         {
-            IEnumerable<string> reasons = Array.Empty<string>();
+            List<string> reasons = new List<string>();
             if (string.IsNullOrEmpty(NAME_TEXTBOX.Text))
             {
-                Helper.AddValueToArray(ref reasons, "❌️ Name is empty");
+                reasons.Add("❌️ Name is empty");
             }
 
             if (!Helper.IsEnglish(NAME_TEXTBOX.Text))
             {
-                Helper.AddValueToArray(ref reasons, "❌️ Name is not in English");
+                reasons.Add("❌️ Name is not in English");
             }
 
             if (string.IsNullOrEmpty(PATH_TEXTBOX.Text))
             {
-                Helper.AddValueToArray(ref reasons, "❌️ Path is empty");
+                reasons.Add("❌️ Path is empty");
             }
 
             if (!File.Exists(PATH_TEXTBOX.Text))
             {
-                Helper.AddValueToArray(ref reasons, "❌️ Path does not exist");
+                reasons.Add("❌️ Path does not exist");
             }
 
             if (PATH_TEXTBOX.Text.Contains("ㅤ"))
             {
-                Helper.AddValueToArray(ref reasons, "❌️ Path contains invalid characters");
+                reasons.Add("❌️ Path contains invalid characters");
             }
 
             return reasons;

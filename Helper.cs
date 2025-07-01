@@ -1,15 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CefSharp;
+using CefSharp.WinForms;
+using Octokit;
+using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using CefSharp;
-using CefSharp.WinForms;
 
 namespace vrchat_launcher
 {
-    internal class Helper
+    internal static class Helper
     {
+        public static async Task<string> GetVersion(string currentVersion)
+        {
+            try
+            {
+                var releaseType = currentVersion.Split('-')[1];
+                var githubClient = new GitHubClient(new ProductHeaderValue("vrchat-Launcher"));
+                var tags = await githubClient.Repository.GetAllTags("puk06", "vrchat-Launcher");
+                string latestVersion = currentVersion;
+                foreach (var tag in tags)
+                {
+                    if (releaseType == "Release")
+                    {
+                        if (tag.Name.Split('-')[1] != "Release") continue;
+                        latestVersion = tag.Name;
+                        break;
+                    }
+
+                    latestVersion = tag.Name;
+                    break;
+                }
+
+                return latestVersion;
+            }
+            catch
+            {
+                throw new Exception("Failed to get latest version");
+            }
+        }
+
         public static void SetControlText(Control control, string text, string defaultText = "")
         {
             control.Text = text ?? defaultText;
@@ -21,6 +51,7 @@ namespace vrchat_launcher
             {
                 RootCachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CefSharp\\Cache")
             };
+
             return Cef.Initialize(settings);
         }
 
@@ -42,11 +73,6 @@ namespace vrchat_launcher
         public static void ShowErrorMessage(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        public static void AddValueToArray<T>(ref IEnumerable<T> array, T value)
-        {
-            array = array.Append(value).ToArray();
         }
 
         public static bool IsEnglish(string text)

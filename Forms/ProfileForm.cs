@@ -12,16 +12,26 @@ namespace vrchat_launcher.Forms
         // This is the main form
         private readonly Main _mainForm;
 
+        // This is the main form
+        private List<Profile> _profiles;
+        internal List<Profile> Profiles
+            => _profiles;
+
+        private Profile _profile;
+        internal Profile Profile
+            => _profile;
+
         // This is the constructor for the ProfileForm
-        public ProfileForm(IEnumerable<Profile> profiles, Main mainForm)
+        internal ProfileForm(Main mainForm, List<Profile> profiles, Profile profile)
         {
             _mainForm = mainForm;
+            _profiles = profiles;
+            _profile = profile;
             InitializeComponent();
-            var enumerable = profiles as Profile[] ?? profiles.ToArray();
-            for (int i = 0; i < enumerable.Length; i++)
+            for (int i = 0; i < _profiles.Count; i++)
             {
-                GenerateButton(enumerable.ElementAt(i));
-                PROFILEEDIT_COMBOBOX.Items.Add(enumerable.ElementAt(i).Name);
+                GenerateButton(_profiles[i]);
+                PROFILEEDIT_COMBOBOX.Items.Add(_profiles[i].Name);
             }
 
             // Highlight the current profile
@@ -59,7 +69,7 @@ namespace vrchat_launcher.Forms
             };
             button.Click += (@object, @event) =>
             {
-                _mainForm.CurrentProfile = profile;
+                _profile = profile;
                 Close();
             };
             button.ContextMenuStrip = new ContextMenuStrip();
@@ -68,10 +78,11 @@ namespace vrchat_launcher.Forms
                 // Ask the user if they are sure they want to delete the profile
                 var result = MessageBox.Show("Are you sure you want to delete this profile?", "Delete Profile", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.No) return;
-                _mainForm.Profiles = _mainForm.Profiles.Where(u => u.Name != profile.Name);
+
+                _profiles.Remove(profile);
                 ProfilesTab.Controls.OfType<Button>().ToList().ForEach(c => c.Dispose());
                 PROFILEEDIT_COMBOBOX.Items.Clear();
-                foreach (var p in _mainForm.Profiles)
+                foreach (var p in _profiles)
                 {
                     GenerateButton(p);
                     PROFILEEDIT_COMBOBOX.Items.Add(p.Name);
@@ -88,8 +99,7 @@ namespace vrchat_launcher.Forms
                     ChangeEditFormStatus(false);
                 }
 
-                _mainForm.SaveConfigData();
-                _mainForm.CurrentProfile = null;
+                _profile = null;
             };
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(button, profile.Description);
@@ -114,10 +124,10 @@ namespace vrchat_launcher.Forms
 
             var profile = CreateProfile();
 
-            _mainForm.Profiles = _mainForm.Profiles.Append(profile);
+            _profiles.Add(profile);
             MessageBox.Show("New profile created successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            _mainForm.CurrentProfile = profile;
-            _mainForm.SaveConfigData();
+
+            _profile = profile;
             UpdateProfile();
             ResetValue();
         }
@@ -132,11 +142,12 @@ namespace vrchat_launcher.Forms
             }
 
             var profile = EditProfile();
-            _mainForm.Profiles = _mainForm.Profiles.Where(u => u.Name != profile.Name);
-            _mainForm.Profiles = _mainForm.Profiles.Append(profile);
+
+            _profiles = _profiles.Where(u => u.Name != profile.Name).ToList();
+            _profiles.Add(profile);
             MessageBox.Show("Profile edited successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            _mainForm.CurrentProfile = profile;
-            _mainForm.SaveConfigData();
+
+            _profile = profile;
             UpdateProfile();
 
             if (PROFILEEDIT_COMBOBOX.Items.Count > 0)
@@ -169,7 +180,7 @@ namespace vrchat_launcher.Forms
         // Check if the profile name already exists
         private bool IsProfileNameDuplicate()
         {
-            return _mainForm.Profiles.Any(userdata => userdata.Name == NAME_TEXTBOX.Text);
+            return _profiles.Any(userdata => userdata.Name == NAME_TEXTBOX.Text);
         }
 
         // Create a new profile based on form input
@@ -179,7 +190,7 @@ namespace vrchat_launcher.Forms
             {
                 Name = NAME_TEXTBOX.Text,
                 Description = USERNAME_TEXTBOX.Text,
-                Index = GenerateIndex(_mainForm.Profiles.ToArray()),
+                Index = GenerateIndex(_profiles.ToArray()),
             };
 
             // Add optional parameters
@@ -208,7 +219,7 @@ namespace vrchat_launcher.Forms
             {
                 Name = NAMEEDIT_TEXTBOX.Text,
                 Description = USERNAMEEDIT_TEXTBOX.Text,
-                Index = _mainForm.Profiles.First(p => p.Name == PROFILEEDIT_COMBOBOX.Text).Index
+                Index = _profiles.First(p => p.Name == PROFILEEDIT_COMBOBOX.Text).Index
             };
 
             // Add optional parameters
@@ -234,7 +245,7 @@ namespace vrchat_launcher.Forms
         {
             ProfilesTab.Controls.OfType<Button>().ToList().ForEach(c => c.Dispose());
             PROFILEEDIT_COMBOBOX.Items.Clear();
-            foreach (var p in _mainForm.Profiles)
+            foreach (var p in _profiles)
             {
                 GenerateButton(p);
                 PROFILEEDIT_COMBOBOX.Items.Add(p.Name);
@@ -258,10 +269,10 @@ namespace vrchat_launcher.Forms
         // Highlight the current profile
         private void HightLightCurrentProfile()
         {
-            if (_mainForm.CurrentProfile == null) return;
+            if (_profile == null) return;
             foreach (Button button in ProfilesTab.Controls.OfType<Button>())
             {
-                if (button.Text == _mainForm.CurrentProfile.Name)
+                if (button.Text == _profile.Name)
                 {
                     button.BackColor = Color.LightGreen;
                 }
@@ -298,7 +309,7 @@ namespace vrchat_launcher.Forms
         // This is the event handler for the PROFILEEDIT_COMBOBOX
         private void PROFILEEDIT_COMBOBOX_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var profile = _mainForm.Profiles.FirstOrDefault(p => p.Name == PROFILEEDIT_COMBOBOX.Text);
+            var profile = _profiles.FirstOrDefault(p => p.Name == PROFILEEDIT_COMBOBOX.Text);
             if (profile == null) return;
             NAMEEDIT_TEXTBOX.Text = profile.Name;
             USERNAMEEDIT_TEXTBOX.Text = profile.Description;
