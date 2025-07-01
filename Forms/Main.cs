@@ -84,7 +84,6 @@ namespace vrchat_launcher.Forms
             } 
             catch (Exception ex)
             {
-                Helper.ShowErrorMessage(ex.ToString());
                 Data = new Database();
             }
         }
@@ -235,7 +234,6 @@ namespace vrchat_launcher.Forms
         private void SaveConfigData()
         {
             var json = JsonSerializer.Serialize(Data, JsonSerializerOptions);
-            Helper.ShowErrorMessage(json);
             File.WriteAllText("./src/data.json", json, Encoding.GetEncoding("Shift_JIS"));
         }
 
