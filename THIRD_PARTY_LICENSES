@@ -5,7 +5,7 @@
 
 This software uses the following third-party libraries:
   
-- Microsoft.CSharp (https://github.com/dotnet/corefx)
+- Microsoft.CSharp, System.Buffers, System.IO.Pipelines, System.Memory, System.Numerics.Vectors, System.Runtime.CompilerServices.Unsafe, System.Text.Encodings.Web, System.Text.Json, System.Threading.Tasks.Extensions, System.ValueTuple (https://github.com/dotnet/corefx) (https://github.com/dotnet/corefx)
   Licensed under the MIT License.
   Copyright (c) .NET Foundation and Contributors
   https://github.com/dotnet/runtime/blob/main/LICENSE.TXT
