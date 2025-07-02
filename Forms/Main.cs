@@ -91,6 +91,8 @@ namespace vrchat_launcher.Forms
 
         private void SetInitialProfile()
         {
+            ChangeDesktopMode(Data.LastSelectedDesktopMode);
+
             if (!string.IsNullOrEmpty(Data.LastSelectedProfile))
             {
                 CurrentProfile = Data.Profiles.FirstOrDefault(profile => profile.Name == Data.LastSelectedProfile);
@@ -428,10 +430,12 @@ namespace vrchat_launcher.Forms
         }
 
         private void DESKTOP_BUTTON_Click(object sender, EventArgs e)
+            => ChangeDesktopMode(!DesktopModeEnabled);
+
+        private void ChangeDesktopMode(bool value)
         {
-            // Enabled <=> Disabled
-            DESKTOP_BUTTON.Text = DesktopModeEnabled ? "Disabled" : "Enabled";
-            DESKTOP_BUTTON.BackColor = DesktopModeEnabled ? Color.LightGreen : Color.LightPink;
+            DESKTOP_BUTTON.Text = value ? "Enabled" : "Disabled";
+            DESKTOP_BUTTON.BackColor = value ? Color.LightGreen : Color.LightPink;
         }
 
         // Refresh the profile
@@ -440,9 +444,7 @@ namespace vrchat_launcher.Forms
             Helper.SetControlText(PROFILE_BUTTON, CurrentProfile?.Name, "No Profile");
             if (CurrentProfile == null) return;
 
-            DESKTOP_BUTTON.Text = CurrentProfile.DesktopMode ? "Enabled" : "Disabled";
-            DESKTOP_BUTTON.BackColor = CurrentProfile.DesktopMode ? Color.LightGreen : Color.LightPink;
-
+            ChangeDesktopMode(CurrentProfile.DesktopMode);
             Data.LastSelectedProfile = CurrentProfile.Name;
         }
 
