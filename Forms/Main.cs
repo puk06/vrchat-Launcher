@@ -352,7 +352,6 @@ namespace vrchat_launcher.Forms
             {
                 AutoSize = true,
                 Location = new Point(41, baseLocation - 66),
-                Name = "label" + software.Name,
                 TabIndex = 1,
                 Text = software.Name,
                 Font = new Font(GuiFont, 15),
@@ -391,7 +390,6 @@ namespace vrchat_launcher.Forms
             {
                 AutoSize = true,
                 Location = new Point(label2Right, baseLocation - 60),
-                Name = "label2" + software.Name,
                 TabIndex = 1,
                 Text = "by " + software.Author,
                 Font = new Font(GuiFont, 11)
@@ -401,7 +399,6 @@ namespace vrchat_launcher.Forms
             {
                 AutoSize = true,
                 Location = new Point(41, baseLocation - 39),
-                Name = "label3" + software.Name,
                 TabIndex = 1,
                 Text = "Description: " + software.Description,
                 Font = new Font(GuiFont, 12)

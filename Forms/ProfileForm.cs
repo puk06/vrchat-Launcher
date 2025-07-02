@@ -60,11 +60,12 @@ namespace vrchat_launcher.Forms
         // Generate a button for each profile
         private void GenerateButton(Profile profile)
         {
+            var size = new Size(250, 42);
             Button button = new Button
             {
                 Text = profile.Name,
                 Location = new Point(14, 45 * (ProfilesTab.Controls.OfType<Button>().Count() + 1)),
-                Size = new Size(250, 42),
+                Size = size,
                 Font = new Font(_mainForm.GuiFont, 15.75F)
             };
             button.Click += (@object, @event) =>
@@ -208,6 +209,7 @@ namespace vrchat_launcher.Forms
                 {
                     return currentIndex;
                 }
+
                 currentIndex++;
             }
         }
