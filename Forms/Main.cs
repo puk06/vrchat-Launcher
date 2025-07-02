@@ -454,18 +454,20 @@ namespace vrchat_launcher.Forms
             {
                 var latestRelease = await Helper.GetVersion(CurrentVersion);
 
+                LATEST_VERSION_TEXT.Text = latestRelease;
+
                 if (latestRelease == CurrentVersion)
                 {
                     UPDATE_BUTTON.Enabled = false;
                     LATEST_VERSION_TEXT.ForeColor = Color.Black;
-                    return;
+                } 
+                else 
+                {
+                    UPDATE_BUTTON.Enabled = true;
+                    LATEST_VERSION_TEXT.ForeColor = Color.Green;
+
+                    MessageBox.Show("An update is available! You can update from the Settings tab!", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                UPDATE_BUTTON.Enabled = true;
-                LATEST_VERSION_TEXT.ForeColor = Color.Green;
-
-                MessageBox.Show("An update is available! You can update from the Settings tab!", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LATEST_VERSION_TEXT.Text = latestRelease;
             }
             catch (Exception exception)
             {
