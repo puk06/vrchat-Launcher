@@ -196,7 +196,7 @@ namespace vrchat_launcher.Forms
                     if (!result) return;
                 }
 
-                if (Data.LastSelectedDesktopMode)
+                if (DesktopModeEnabled)
                 {
                     ProcessStartInfo startInfo = new ProcessStartInfo
                     {
@@ -234,6 +234,7 @@ namespace vrchat_launcher.Forms
         private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true };
         private void SaveConfigData()
         {
+            Data.LastSelectedDesktopMode = DesktopModeEnabled;
             var json = JsonSerializer.Serialize(Data, JsonSerializerOptions);
             File.WriteAllText("./src/data.json", json, Encoding.GetEncoding("Shift_JIS"));
         }
@@ -429,9 +430,8 @@ namespace vrchat_launcher.Forms
         private void DESKTOP_BUTTON_Click(object sender, EventArgs e)
         {
             // Enabled <=> Disabled
-            DESKTOP_BUTTON.Text = DESKTOP_BUTTON.Text == "Enabled" ? "Disabled" : "Enabled";
-            DESKTOP_BUTTON.BackColor = DESKTOP_BUTTON.Text == "Enabled" ? Color.LightGreen : Color.LightPink;
-            Data.LastSelectedDesktopMode = DESKTOP_BUTTON.Text == "Enabled";
+            DESKTOP_BUTTON.Text = DesktopModeEnabled ? "Disabled" : "Enabled";
+            DESKTOP_BUTTON.BackColor = DesktopModeEnabled ? Color.LightGreen : Color.LightPink;
         }
 
         // Refresh the profile
@@ -440,7 +440,6 @@ namespace vrchat_launcher.Forms
             Helper.SetControlText(PROFILE_BUTTON, CurrentProfile?.Name, "No Profile");
             if (CurrentProfile == null) return;
 
-            Data.LastSelectedDesktopMode = CurrentProfile.DesktopMode;
             DESKTOP_BUTTON.Text = CurrentProfile.DesktopMode ? "Enabled" : "Disabled";
             DESKTOP_BUTTON.BackColor = CurrentProfile.DesktopMode ? Color.LightGreen : Color.LightPink;
 
@@ -490,6 +489,9 @@ namespace vrchat_launcher.Forms
                     MessageBoxIcon.Error);
             }
         }
+
+        private bool DesktopModeEnabled
+            => DESKTOP_BUTTON.Text == "Enabled";
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
